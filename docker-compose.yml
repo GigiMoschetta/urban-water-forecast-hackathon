@@ -1,0 +1,29 @@
+services:
+  verify:
+    build: .
+    volumes:
+      - ./data:/workspace/data:ro
+      - ./outputs:/workspace/outputs:ro
+    command: ["python", "scripts/run_reproduction_pipeline.py"]
+
+  reproduce:
+    build: .
+    volumes:
+      - ./data:/workspace/data:ro
+      - ./outputs:/workspace/outputs
+    command: ["python", "scripts/run_reproduction_pipeline.py", "--rebuild-compact5", "--trials", "150"]
+    profiles: ["reproduce"]
+
+  reproduce-legacy:
+    build: .
+    volumes:
+      - ./data:/workspace/data:ro
+      - ./outputs:/workspace/outputs
+    command: ["python", "scripts/run_reproduction_pipeline.py", "--rebuild-open-pipeline", "--trials", "150"]
+    profiles: ["legacy"]
+
+  demo:
+    build: ./demo
+    ports:
+      - "3000:3000"
+    profiles: ["demo"]

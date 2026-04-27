@@ -1,0 +1,28 @@
+# Confidential dataset — never commit
+data/original/*
+!data/original/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Pitch slides — separate deliverable, not part of the public code repo
+slides/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+src/*.egg-info/
+uv.lock
+
+# Editor / tooling
+.claude/
+.Rhistory
+*.~lock.*
+.env
+
+# Demo (Next.js)
+demo/node_modules/
+demo/.next/
+
+# Run artifacts (kept locally only)
+outputs/reports/

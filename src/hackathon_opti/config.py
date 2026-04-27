@@ -1,0 +1,47 @@
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+DATASET_XLSX = REPO_ROOT / "data" / "original" / "units_hackathon_challenge_dataset.xlsx"
+PROCESSED_DIR = REPO_ROOT / "data" / "processed"
+OUTPUTS_DIR = REPO_ROOT / "outputs"
+METRICS_DIR = OUTPUTS_DIR / "metrics"
+PREDICTIONS_DIR = OUTPUTS_DIR / "predictions"
+REPORTS_DIR = OUTPUTS_DIR / "reports"
+
+TIMESERIES_KEY = ["cell_id", "rate_category_id", "period_ym"]
+CANONICAL_TIMESERIES = PROCESSED_DIR / "timeseries_canonical.csv"
+CLEAN_ADJACENCY = PROCESSED_DIR / "adjacency_clean.csv"
+AUDIT_SUMMARY = REPORTS_DIR / "data_audit_summary.json"
+BASELINE_METRICS = METRICS_DIR / "seasonal_naive_fold_metrics.csv"
+BASELINE_PREDICTIONS = PREDICTIONS_DIR / "seasonal_naive_predictions.csv"
+MODEL_V1_METRICS = METRICS_DIR / "model_v1_fold_metrics.csv"
+MODEL_V1_PREDICTIONS = PREDICTIONS_DIR / "model_v1_predictions.csv"
+MODEL_V2_BLEND_75_25_METRICS = METRICS_DIR / "model_v2_blend_75_25_fold_metrics.csv"
+MODEL_V3_METRICS = METRICS_DIR / "model_v3_fold_metrics.csv"
+MODEL_V3_PREDICTIONS = PREDICTIONS_DIR / "model_v3_predictions.csv"
+MODEL_V3_IMPORTANCE = REPORTS_DIR / "model_v3_feature_importance.csv"
+MODEL_V3D_PREDICTIONS = PREDICTIONS_DIR / "model_v3_denoised_predictions.csv"
+MODEL_V3D_METRICS = METRICS_DIR / "model_v3_denoised_fold_metrics.csv"
+ENSEMBLE_METRICS = METRICS_DIR / "ensemble_fold_metrics.csv"
+ENSEMBLE_PREDICTIONS = PREDICTIONS_DIR / "ensemble_predictions.csv"
+ENSEMBLE_FIXED_BLEND_NAME = "leak_free_v1_naive_blend_75_25"
+ENSEMBLE_FIXED_V1_WEIGHT = 0.75
+ENSEMBLE_FIXED_NAIVE_WEIGHT = 0.25
+ENSEMBLE_FIXED_BLEND_METRICS = METRICS_DIR / f"{ENSEMBLE_FIXED_BLEND_NAME}_fold_metrics.csv"
+ENSEMBLE_FIXED_BLEND_PREDICTIONS = PREDICTIONS_DIR / f"{ENSEMBLE_FIXED_BLEND_NAME}_predictions.csv"
+ENSEMBLE_FIXED_BLEND_NOTE = REPORTS_DIR / f"{ENSEMBLE_FIXED_BLEND_NAME}_note.md"
+MODEL_V8_PREDICTIONS = PREDICTIONS_DIR / "model_v8_direct_predictions.csv"
+MODEL_V8_METRICS = METRICS_DIR / "model_v8_direct_fold_metrics.csv"
+MODEL_V8_IMPORTANCE = REPORTS_DIR / "model_v8_feature_importance.csv"
+ENSEMBLE_STACKING_PREDICTIONS = PREDICTIONS_DIR / "ensemble_stacking_predictions.csv"
+ENSEMBLE_STACKING_METRICS = METRICS_DIR / "ensemble_stacking_fold_metrics.csv"
+MODEL_V9_PREDICTIONS = PREDICTIONS_DIR / "model_v9_predictions.csv"
+MODEL_V9_METRICS = METRICS_DIR / "model_v9_fold_metrics.csv"
+MODEL_V9_IMPORTANCE = REPORTS_DIR / "model_v9_feature_importance.csv"
+
+PRIMARY_MODEL_NAME = "ensemble_3m_v1_v9o_nested"
+PRIMARY_MODEL_PREDICTIONS = PREDICTIONS_DIR / f"{PRIMARY_MODEL_NAME}_predictions.csv"
+PRIMARY_MODEL_METRICS = METRICS_DIR / f"{PRIMARY_MODEL_NAME}_fold_metrics.csv"
+OFFICIAL_REFERENCE_MODEL_NAME = "ensemble_v3_enhanced_nested"
+OFFICIAL_REFERENCE_MODEL_PREDICTIONS = PREDICTIONS_DIR / f"{OFFICIAL_REFERENCE_MODEL_NAME}_predictions.csv"
+OFFICIAL_REFERENCE_MODEL_METRICS = METRICS_DIR / f"{OFFICIAL_REFERENCE_MODEL_NAME}_fold_metrics.csv"

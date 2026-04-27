@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hackathon-opti"
+version = "0.1.0"
+description = "Water-demand forecasting hackathon project"
+requires-python = ">=3.12"
+
+dependencies = [
+  "scikit-learn>=1.5,<1.7",
+  "pandas>=3.0.0",
+  "openpyxl>=3.1.5",
+  "lightgbm>=4.0",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

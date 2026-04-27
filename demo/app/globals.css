@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Outfit', 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+  --font-mono: 'SF Mono', 'Fira Code', monospace;
+
+  /* Acegas Water Palette */
+  --color-water-50: #e6f7fb;
+  --color-water-100: #b3e8f4;
+  --color-water-200: #80d9ec;
+  --color-water-400: #22b8cf;
+  --color-water-500: #0891b2;
+  --color-water-600: #0e7490;
+  --color-water-700: #155e75;
+  --color-water-900: #083344;
+
+  --color-navy-950: #060d1b;
+  --color-navy-900: #0a1628;
+  --color-navy-800: #0f1d32;
+  --color-navy-700: #1a2940;
+
+  --color-forecast: #10b981;
+  --color-actual: #38bdf8;
+  --color-naive: #f59e0b;
+}
+
+/* ── RESET ──────────────────────────────────────────────── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--color-navy-950);
+  color: #e0eaf4;
+  font-family: var(--font-sans);
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── DASHBOARD LAYOUT ───────────────────────────────────── */
+.dashboard-root {
+  display: grid;
+  grid-template-columns: 190px 1fr 220px;
+  grid-template-rows: 48px 1fr 170px;
+  width: 100vw;
+  height: 100vh;
+  gap: 6px;
+  padding: 6px;
+  background: var(--color-navy-950);
+}
+
+.header-area {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: var(--color-navy-900);
+  border: 1px solid rgba(56, 189, 248, 0.08);
+  border-radius: 10px;
+}
+
+.sidebar-left {
+  grid-column: 1;
+  grid-row: 2 / 4;
+  height: 100%;
+}
+
+.main-content {
+  grid-column: 2;
+  grid-row: 2;
+  background: var(--color-navy-900);
+  border: 1px solid rgba(56, 189, 248, 0.08);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-right {
+  grid-column: 3;
+  grid-row: 2 / 4;
+  height: 100%;
+}
+
+.bottom-panel {
+  grid-column: 2;
+  grid-row: 3;
+  height: 100%;
+}
+
+/* ── COMPONENTS ─────────────────────────────────────────── */
+.panel-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-navy-900);
+  border: 1px solid rgba(56, 189, 248, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.section-label {
+  font-size: 10px;
+  color: rgba(56, 189, 248, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* ── SCROLLBAR ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.12); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(56, 189, 248, 0.25); }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .dashboard-root {
+    grid-template-columns: 170px 1fr 190px;
+  }
+}
+
+@media (max-width: 900px) {
+  html, body { overflow: auto; }
+  .dashboard-root {
+    grid-template-columns: 1fr;
+    grid-template-rows: 56px auto auto auto auto;
+    height: auto;
+    min-height: 100vh;
+  }
+  .sidebar-left { grid-column: 1; grid-row: 2; max-height: 400px; overflow-y: auto; }
+  .main-content { grid-column: 1; grid-row: 3; min-height: 400px; }
+  .sidebar-right { grid-column: 1; grid-row: 4; }
+  .bottom-panel { grid-column: 1; grid-row: 5; }
+  .bottom-panel .panel-container { flex-direction: column; }
+}
+
+/* ── ANIMATIONS ─────────────────────────────────────────── */
+@keyframes dash-flow { to { stroke-dashoffset: -20; } }
+.dash-animate { animation: dash-flow 1.2s linear infinite; }
+
+/* Domain event pin pulse ring */
+@keyframes domain-pulse {
+  0%   { r: 12; opacity: 0.6; }
+  50%  { r: 18; opacity: 0; }
+  100% { r: 12; opacity: 0; }
+}
+
+/* Domain event pin entrance (mirrors season-sweep stagger) */
+@keyframes domain-enter {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.8); }
+  60%  { opacity: 1; transform: translateY(-2px) scale(1.05); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Domain event pin subtle float */
+@keyframes domain-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-2px); }
+}
+
+/* Seasonality band sweep reveal */
+@keyframes season-sweep {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Domain connector line shimmer */
+@keyframes connector-shimmer {
+  0%   { stroke-dashoffset: 12; }
+  100% { stroke-dashoffset: 0; }
+}
+
+
+/* ── INPUTS ─────────────────────────────────────────────── */
+input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  background: transparent; cursor: pointer; width: 100%;
+}
+input[type="range"]::-webkit-slider-track {
+  height: 4px;
+  background: rgba(56, 189, 248, 0.12);
+  border-radius: 2px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; height: 16px; width: 16px;
+  border-radius: 50%; background: #0891b2; border: 2px solid var(--color-navy-950); margin-top: -6px;
+  box-shadow: 0 0 8px rgba(8, 145, 178, 0.4);
+}
+
+select {
+  -webkit-appearance: none; appearance: none;
+  background: rgba(56, 189, 248, 0.05); color: #e0eaf4;
+  border: 1px solid rgba(56, 189, 248, 0.12); border-radius: 8px;
+  padding: 8px 32px 8px 12px; font-size: 13px; cursor: pointer; outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='rgba(56,189,248,0.4)' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+}
+select:focus { border-color: #0891b2; }

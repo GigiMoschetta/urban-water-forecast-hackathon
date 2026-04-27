@@ -1,0 +1,8 @@
+scikit-learn>=1.5,<1.7
+pandas>=3.0.0
+numpy
+openpyxl>=3.1.5
+lightgbm>=4.0
+scipy>=1.14
+optuna>=3.6
+PyWavelets>=1.6
